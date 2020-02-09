@@ -28,30 +28,30 @@
     <div class="container">
 
         <!-- Looping through news   -->
-        {% for image in images %}
+        {% for post in posts %}
       
         <div class="row">
           <!-- displaying News articles -->
           <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <h2 class="text-center"> {{ image.name }} </h2>
+            <h2 class="text-center"> {{ posts.image_name }} </h2>
             <div class="col">
-            <i class="fas fa-map-marker-alt"></i> {{image.image_caption}}
+            <i class="fas fa-map-marker-alt"></i> {{posts.image_caption}}
             </div>
           </div>
       
         </div>
         <!--Display news Article images  -->
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <img src="{{image.image.url}}" class="img-responsive" alt="Image">
+        <img src="{{posts.image.url}}" class="img-responsive" alt="Image">
       </div>
   
       
        
-        <div class="row">
-            <!-- <i class="fas fa-stopwatch"></i> {{image.timestamp}} -->
-          <h2 class="text-center">There No Profiles found</h2>
-        </div>
+        
         {% endfor %}
+        <div class="row">
+            <h2 class="text-center">There No Profiles found</h2>
+          </div>
       
       </div>
 </body>
