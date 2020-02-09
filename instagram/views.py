@@ -6,4 +6,4 @@ from .models import Profile,Image
 def home(request):
     images= Image.object.all()
     profiles=Profile.object.all()
-    return render(request,'home.html','images':images,'profiles':profiles)
+    return render(request,'home.html',{'images':images,'profiles':profiles})

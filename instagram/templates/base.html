@@ -25,5 +25,30 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
      {% bootstrap_javascript %}
     {% endblock %}
+    <div class="container">
+
+        <!-- Looping through news   -->
+        {% for image in images %}
+      
+        <div class="row">
+          <!-- displaying News articles -->
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <img src="{{image.image.url}}" alt="">
+            <h2 class="text-center"> {{ image.name }} </h2>
+            <div class="col">
+            <i class="fas fa-map-marker-alt"></i> {{image.image_caption}}
+            </div>
+          </div>
+      
+        </div>
+      
+        {% empty %}
+        <div class="row">
+            <i class="fas fa-stopwatch"></i> {{image.timestamp}}
+          <h2 class="text-center">There No News Items</h2>
+        </div>
+        {% endfor %}
+      
+      </div>
 </body>
 </html>
