@@ -11,10 +11,10 @@ class Profile(models.Model):
         self.save()
 
     def delete_profile(self):
-        save.delete()
+        self.delete()
 
     def __str__(self):
-        return self.profile_photo        
+        return self.bio        
 
 class Image(models.Model):
     image=models.ImageField(upload_to='images/')
@@ -24,7 +24,7 @@ class Image(models.Model):
     likes=models.IntegerField()
     comments=models.CharField(max_length=30,blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
-    
+
     def __str__(self):
         return self.image_name
 

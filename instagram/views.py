@@ -4,6 +4,6 @@ from .models import Profile,Image
 
 # Create your views here.
 def home(request):
-    images= Image.object.all()
-    profiles=Profile.object.all()
-    return render(request,'home.html',{'images':images,'profiles':profiles})
+    image=Image.objects.all()  
+    profile=Profile.objects.all()
+    return render(request,'home.html',{'image':image,'profile':profile})
