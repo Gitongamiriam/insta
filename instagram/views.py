@@ -1,8 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse,Http404
 from .models import Image,Profile
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+
+@login_required(login_url='/accounts/login/')
 def home(request):
     posts=Image.show_images() 
   
