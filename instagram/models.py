@@ -36,8 +36,7 @@ class Image(models.Model):
 
     @classmethod
     def show_images(cls):
-        images =cls.objects.order_by('post_time') 
-        return images
+        return cls.objects.order_by('post_time')
            
 
     # @classmethod
