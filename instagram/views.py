@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse,Http404
-from .models import Image
+from .models import Image,Profile
 
 # Create your views here.
 def home(request):
     posts=Image.show_images() 
-  
+    posts=Profile.search_profiles()
     return render(request,'home.html',{'posts':posts})
 
 def search_results(request):

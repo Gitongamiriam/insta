@@ -14,7 +14,13 @@ class Profile(models.Model):
         self.delete()
 
     def __str__(self):
-        return self.bio        
+        return self.bio   
+
+    @classmethod
+    def search_profiles(cls, profile):
+        profile = profile.objects.get(name=profile)
+        profiles = cls.objects.filter(profile=profile.id)
+        return profiles         
 
 class Image(models.Model):
     image=models.ImageField(upload_to='images/')
@@ -36,7 +42,8 @@ class Image(models.Model):
 
     @classmethod
     def show_images(cls):
-        return cls.objects.order_by('post_time')
+        post =cls.objects.order_by('post_time') 
+        return post
            
 
     # @classmethod
@@ -48,9 +55,5 @@ class Image(models.Model):
     #     except DoesNotExist:
     #         print("object not found")    
 
-    # @classmethod
-    # def search_profiles(cls, profile):
-    #     profile = profile.objects.get(name=profile)
-    #     profiles = cls.objects.filter(profile=profile.id)
-    #     return profiles
+   
 
