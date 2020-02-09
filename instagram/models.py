@@ -2,11 +2,11 @@ from django.db import models
 
 
 
-# Create your models here.
+
 class Profile(models.Model):
     profile_photo=models.ImageField(upload_to='profiles/')
     bio=models.CharField(max_length=30,blank=True)
-
+    
     def save_profile(self):
         self.save()
 
@@ -17,16 +17,29 @@ class Profile(models.Model):
         return self.bio   
 
     @classmethod
-    def search_profiles(cls, profile):
+    def search_profile(cls, profile):
         profile = profile.objects.get(name=profile)
         profiles = cls.objects.filter(profile=profile.id)
-        return profiles         
+        return profile
+
+    @classmethod
+    def get_profile_by_id(cls, id):
+        try:
+            profile = cls.objects.get(id=id)
+            print("Object found")
+            return profile
+        except DoesNotExist:
+            print("object not found")       
+
+
+    
+  
 
 class Image(models.Model):
     image=models.ImageField(upload_to='images/')
     image_name=models.CharField(max_length=30)
     image_caption=models.CharField(max_length=30,blank=True)
-    profile=models.ForeignKey(Profile)
+    # profile=models.ForeignKey(Profile)
     likes=models.IntegerField()
     comments=models.CharField(max_length=30,blank=True)
     post_time=models.DateTimeField(auto_now_add=True)
@@ -46,14 +59,7 @@ class Image(models.Model):
         return post
            
 
-    # @classmethod
-    # def get_profile_by_id(cls, id):
-    #     try:
-    #         profile = cls.objects.get(id=id)
-    #         print("Object found")
-    #         return profile
-    #     except DoesNotExist:
-    #         print("object not found")    
+ 
 
    
 
