@@ -33,4 +33,8 @@ class Image(models.Model):
 
     def delete_image(self):
         self.delete()
-                
+
+    @classmethod
+    def show_images(cls):
+        return cls.objects.order_by('post_time')    
+
