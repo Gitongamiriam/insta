@@ -25,3 +25,12 @@ class Image(models.Model):
     comments=models.CharField(max_length=30,blank=True)
     post_time=models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.image_name
+
+    def save_image(self):
+        self.save()
+
+    def delete_image(self):
+        self.delete()
+                
