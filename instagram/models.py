@@ -1,40 +1,27 @@
 from django.db import models
+from tinymce.models import HTMLField
 from django.contrib.auth.models import User
 
 
 
 
 class Profile(models.Model):
-    profile_photo=models.ImageField(upload_to='profiles/')
-    bio=models.CharField(max_length=30,blank=True)
-    
-    def save_profile(self):
-        self.save()
-
-    def delete_profile(self):
-        self.delete()
-
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    profile_pic = models.ImageField(blank=True,upload_to='prof_pics',default='default.png')
+    bio = models.TextField(blank=True)
+    followers= models.ManyToManyField(User,related_name='followers', blank=True)
+    following= models.ManyToManyField(User,related_name='following', blank=True)
+  
     def __str__(self):
-        return self.bio   
+        return f"{self.user}'s Profile"
 
+
+    
     @classmethod
-    def search_profile(cls, profile):
+    def search_user(cls, profile):
         profile = profile.objects.get(name=profile)
         profiles = cls.objects.filter(profile=profile.id)
-        return profile
-
-    @classmethod
-    def get_profile_by_id(cls, id):
-        try:
-            profile = cls.objects.get(id=id)
-            print("Object found")
-            return profile
-        except DoesNotExist:
-            print("object not found")       
-
-
-    
-  
+        return profil
 
 class Image(models.Model):
     image=models.ImageField(upload_to='images/')
@@ -42,7 +29,7 @@ class Image(models.Model):
     image_caption=models.CharField(max_length=30,blank=True)
     likes=models.ManyToManyField(User,blank = True,related_name = 'post_likes')
     post_time=models.DateTimeField(auto_now_add=True)
-    posted_by = models.ForeignKey(User,on_delete = models.CASCADE,blank=True)
+    posted_by = models.ForeignKey(User,on_delete = models.CASCADE)
 
 
     def __str__(self):

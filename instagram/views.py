@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse,Http404
-from .models import Image,Profile
+from .models import Image
 from django.contrib.auth.decorators import login_required
 from .forms import *
 from django.contrib import messages
@@ -12,7 +12,9 @@ User = get_user_model()
 
 @login_required(login_url='/accounts/login/')
 def home(request):
-    posts=Image.show_images() 
+    posts=Image.objects.all() 
+    profile = Profile.objects.filter(user = request.user)
+
   
     return render(request,'home.html',{'posts':posts})
 
@@ -33,15 +35,27 @@ def search_results(request):
 def add_new_image_post(request):
     user = User.objects.get(id = request.user.id)
     if request.method == 'POST':
-        form = imagePostForm(request.POST,request.FILES)
+        form = ImagePostForm(request.POST,request.FILES)
         if form.is_valid():
             newpost = form.save(commit = False)
-            newpost.posted_by = user
+            newpost.posted_by = request.user
+
             newpost.save()
-            return redirect('/')
-        else:
-            messages.info(request,"all fields are required")
-            return redirect('newpost')
+        return redirect('home')
+
+        # else:
+        #     messages.info(request,"all fields are required")
+        #     return redirect('newpost')
     else:
-        form = imagePostForm()
+        form = ImagePostForm()
         return render(request,'new_post.html',{"form":form})
+
+# @login_required
+# def profile(request, id):
+#     user = User.objects.get(id=id)
+#     profile = Profile.objects.filter(user = request.user)
+#     posts = Image.objects.filter(profile__id=id)[::-1]
+#     form = ImagePostForm()
+#     return render(request, "profile.html", context={"user":user,
+#                                                              "profile":profile,
+#                                                              "posts":posts,"form":form})        

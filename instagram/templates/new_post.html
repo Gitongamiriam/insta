@@ -2,8 +2,8 @@
 {%load bootstrap3%}
 {%block content%}
 <div class="container">
-    <form action="/new/post/" method="POST">
-        {%bootstrap_form form%}
+    <form action="/new/post/" method="POST" enctype="multipart/form-data">
+        {%bootstrap_form form%}{% csrf_token %} 
         <input type="submit" value="POST">
     </form>
 </div>
