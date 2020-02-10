@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 
@@ -39,10 +40,10 @@ class Image(models.Model):
     image=models.ImageField(upload_to='images/')
     image_name=models.CharField(max_length=30)
     image_caption=models.CharField(max_length=30,blank=True)
-    # profile=models.ForeignKey(Profile)
-    likes=models.IntegerField()
-    comments=models.CharField(max_length=30,blank=True)
+    likes=models.ManyToManyField(User,blank = True,related_name = 'post_likes')
     post_time=models.DateTimeField(auto_now_add=True)
+    posted_by = models.ForeignKey(User,on_delete = models.CASCADE,blank=True)
+
 
     def __str__(self):
         return self.image_name

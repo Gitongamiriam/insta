@@ -1,0 +1,10 @@
+{%extends 'base.html'%}
+{%load bootstrap3%}
+{%block content%}
+<div class="container">
+    <form action="/new/post/" method="POST">
+        {%bootstrap_form form%}
+        <input type="submit" value="POST">
+    </form>
+</div>
+{%endblock%}
