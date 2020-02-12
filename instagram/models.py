@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
-    profile_pic = models.ImageField(blank=True,upload_to='prof_pics',default='default.png')
+    profile_pic = models.ImageField(blank=True,upload_to='images/')
     bio = models.TextField(blank=True)
     followers= models.ManyToManyField(User,related_name='followers', blank=True)
     following= models.ManyToManyField(User,related_name='following', blank=True)
@@ -21,7 +21,7 @@ class Profile(models.Model):
     def search_user(cls, profile):
         profile = profile.objects.get(name=profile)
         profiles = cls.objects.filter(profile=profile.id)
-        return profil
+        return profile
 
 class Image(models.Model):
     image=models.ImageField(upload_to='images/')

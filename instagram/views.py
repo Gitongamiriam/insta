@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse,Http404
-from .models import Image
+from .models import Image,Profile
 from django.contrib.auth.decorators import login_required
 from .forms import *
 from django.contrib import messages
@@ -50,13 +50,26 @@ def add_new_image_post(request):
         form = ImagePostForm()
         return render(request,'new_post.html',{"form":form})
 
-# @login_required
-# def profile(request, id):
-#     user = User.objects.get(id=id)
-#     profile = Profile.objects.filter(user = request.user)
-#     posts = Image.objects.filter(profile__id=id)[::-1]
-#     form = ImagePostForm()
-#     return render(request, "profile.html", context={"user":user,
-#                                                              "profile":profile,
-#                                                              "posts":posts,"form":form})  
-# 
+
+@login_required
+def profile(request):
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST, request.FILES)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            # p_form.save()
+            messages.success(request, f'Your account has been updated')
+            return redirect('profile')
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm()
+        context = {
+            'u_form': u_form,
+            'p_form': p_form
+    }
+    return render(request, 'profile.html', context)
+
+ 
+                                                         
+

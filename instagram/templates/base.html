@@ -14,6 +14,7 @@
   {% block styles %}
     {% bootstrap_css %}
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
 
   {% endblock %}
@@ -21,6 +22,7 @@
 </head>
 <body>
     {% include "navbar.html" %}
+    <!-- <h1 class ='text-center'><a class="active fa fa-camera" style="color: black;" href="#">Instagram</a></h1> -->
     {% block content %} <h1 class='text-center'><a class="active fa fa-camera" style="color: black;" href="#">Instagram</a>
     </h1> {%endblock%}
 
@@ -33,24 +35,24 @@
       
 
         {% for post in posts %}
-         <div class="card">
-          <!-- displaying News articles -->
-          <!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"> -->
-            <img src="{{post.image.url}}" class="img-responsive" alt="Image">
-          <!-- </div> -->
-          <!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"> -->
-            <h5> {{ post.image_name }}</h5>
-            <i class="fas fa-map-marker-alt"></i> {{post.image_caption}}
-            <div class="col">
-            <button type="submit"><i class="fa fa-heart-o" style="color: black;"></i></i></button>
-            <button type="submit"><i class="fa fa-comment-o" style="color: black;"></i></i></button>
-            <button type="submit"><i class="fa fa-location-arrow" style="color: black;"></i></button>
-
-
-            </div> 
+        <div class="w3-container w3-center" style="margin-top: 2%;">
+          <div class="w3-card-4" style="width:50%;padding: 2%;">
+              <img src="{{post.image.url}}" class="img-responsive" alt="Image">
+                <!-- </div> -->
+                <!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"> -->
+                  <h5> {{ post.image_name }}</h5>
+                  <i class="fas fa-map-marker-alt"></i> {{post.image_caption }}
+                  
+                  <button type="submit"><i class="fa fa-heart-o" style="color: black;"></i></i></button>
+                  <button type="submit"><i class="fa fa-comment-o" style="color: black;"></i></i></button>
+                  <button type="submit"><i class="fa fa-location-arrow" style="color: black;"></i></button>
+      
+      
+                
           </div>
+      </div>
        
-         </div>
+         <!-- </div> -->
      
   
       
