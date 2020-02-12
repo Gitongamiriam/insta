@@ -58,4 +58,27 @@ def add_new_image_post(request):
 #     form = ImagePostForm()
 #     return render(request, "profile.html", context={"user":user,
 #                                                              "profile":profile,
-#                                                              "posts":posts,"form":form})        
+#                                                              "posts":posts,"form":form})  
+# 
+def like(request):
+    '''
+    view function that handles the like functionality
+    '''
+    user = request.user
+    image = get_object_or_404(Images,id= request.POST.get('image.id') )
+    if image.liked.filter(id = user.id).exists():
+        image.liked.remove(user)
+    else:
+        image.liked.add(request.user)
+    return redirect('home')
+def follow(request):
+    '''
+    views function that handles the follow functionality
+    '''
+    user = request.user
+    follow = get_object_or_404(Profile,user= request.POST.get('usr.id'))
+    if follow.followers.filter(id = user.id).exists():
+        follow.followers.remove(user)
+    else:
+        follow.followers.add(user)
+    return redirect('home')      

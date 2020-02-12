@@ -14,6 +14,8 @@
   {% block styles %}
     {% bootstrap_css %}
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+
   {% endblock %}
 
 </head>
@@ -39,8 +41,11 @@
             <h2 class="text-center"> {{ post.image_name }}</h2>
             <div class="col">
             <i class="fas fa-map-marker-alt"></i> {{post.image_caption}}
-            <h5>{{post.comments}}</h5>
-            <h5>{{post.likes}}</h5>
+            <button type="submit"><i class="fa fa-heart-o" style="color: black;"></i></i></button>
+            <button type="submit"><i class="fa fa-comment-o" style="color: black;"></i></i></button>
+            <button type="submit"><i class="fa fa-location-arrow" style="color: black;"></i></button>
+
+
             </div> 
           </div>
        
