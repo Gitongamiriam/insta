@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model
-from .models import *
+from . models import *
 
 User = get_user_model()
 class ImagePostForm(forms.ModelForm):
@@ -11,3 +11,5 @@ class ImagePostForm(forms.ModelForm):
             'post_time',
             'posted_by',
         ]
+
+        
